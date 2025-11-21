@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vis Novus Consulting - Our Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .logo {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .filters {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .partner-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            border: 4px solid #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .partner-name {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .partner-role {
+            font-size: 1.1em;
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .partner-brand {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .expertise-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .experience-summary {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .experience-summary h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .experience-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .org-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .position {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .contact-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .email-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .email-btn:hover {
+            background: #229954;
+        }
+
+        .linkedin-btn {
+            background: #0077b5;
+            color: white;
+        }
+
+        .linkedin-btn:hover {
+            background: #005582;
+        }
+
+        .collective-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .collective-section h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .error {
+            background: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="Vis Novus Consulting" class="logo" id="logo-img">
+            <h1>Our Partners</h1>
+            <p>Meet the experienced professionals behind Vis Novus Consulting</p>
+        </div>
+
+        <div id="loadingMessage" class="loading">Loading partner data...</div>
+        <div id="errorMessage" class="error" style="display: none;"></div>
+
+        <div id="filtersSection" style="display: none;" class="filters">
+            <div class="filter-group">
+                <span class="filter-label">Filter by Expertise:</span>
+                <button class="filter-btn active" onclick="filterPartners('all')">All Partners</button>
+                <button class="filter-btn" onclick="filterPartners('Strategic Planning')">Strategic Planning</button>
+                <button class="filter-btn" onclick="filterPartners('Project Management')">Project Management</button>
+                <button class="filter-btn" onclick="filterPartners('AI/Technology')">AI & Technology</button>
+                <button class="filter-btn" onclick="filterPartners('Leadership Development')">Leadership</button>
+            </div>
+        </div>
+
+        <div id="collectiveSection" style="display: none;" class="collective-section">
+            <h2>Our Collective Experience</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalYears">0</div>
+                    <div class="stat-label">Combined Years of Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPartners">0</div>
+                    <div class="stat-label">Expert Partners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalExpertise">0</div>
+                    <div class="stat-label">Areas of Expertise</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalLanguages">0</div>
+                    <div class="stat-label">Languages Spoken</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="partnersContainer" class="partners-grid"></div>
+    </div>
+
+    <script>
+        // CONFIGURATION - Replace with your Google Sheets Web App URL
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzHYGsAN3wnyzf2w8DurkU2LtkxjGCzpfsXi8l8MoYsSpHnoH8_NlCz7-wkHGtT6XY2WA/exec';
+
+        let allPartners = [];
+        let currentFilter = 'all';
+
+        // Hide logo if file doesn't exist
+        document.getElementById('logo-img').onerror = function() {
+            this.style.display = 'none';
+        };
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadPartnerData);
+
+        async function loadPartnerData() {
+            if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_SHEETS_URL_HERE') {
+                showError('Please configure the Google Sheets URL first. Check the setup instructions.');
+                return;
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL);
+                const data = await response.json();
+                
+                if (data.error) {
+                    showError(data.error);
+                    return;
+                }
+
+                allPartners = data.partners || [];
+                displayPartners();
+                updateCollectiveStats();
+                
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('filtersSection').style.display = 'block';
+                document.getElementById('collectiveSection').style.display = 'block';
+
+            } catch (error) {
+                showError('Error loading partner data. Please try again later.');
+                console.error('Error:', error);
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+
+        function displayPartners() {
+            const container = document.getElementById('partnersContainer');
+            container.innerHTML = '';
+
+            const filteredPartners = currentFilter === 'all' 
+                ? allPartners 
+                : allPartners.filter(p => p.expertise.includes(currentFilter));
+
+            if (filteredPartners.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: white; grid-column: 1/-1;">No partners found matching this filter.</p>';
+                return;
+            }
+
+            filteredPartners.forEach(partner => {
+                const card = createPartnerCard(partner);
+                container.innerHTML += card;
+            });
+        }
+
+        function createPartnerCard(partner) {
+            const expertiseTags = partner.expertise.map(exp => 
+                `<span class="expertise-tag">${exp}</span>`
+            ).join('');
+
+            const experiences = partner.experiences.slice(0, 3).map(exp => 
+                `<div class="experience-item">
+                    <div class="org-name">${exp.organization}</div>
+                    <div class="position">${exp.position}</div>
+                </div>`
+            ).join('');
+
+            const brandStatement = partner.brandStatement 
+                ? `<div class="partner-brand">"${partner.brandStatement}"</div>` 
+                : '';
+
+            const linkedinLink = partner.linkedin 
+                ? `<a href="${partner.linkedin}" target="_blank" class="contact-btn linkedin-btn">LinkedIn</a>` 
+                : '';
+
+            return `
+                <div class="partner-card">
+                    <div class="partner-photo"></div>
+                    <h3 class="partner-name">${partner.name}</h3>
+                    <div class="partner-role">${partner.role}</div>
+                    
+                    ${brandStatement}
+                    
+                    <div class="expertise-tags">
+                        ${expertiseTags}
+                    </div>
+                    
+                    <div class="experience-summary">
+                        <h4>Key Experience</h4>
+                        ${experiences}
+                    </div>
+                    
+                    <div class="contact-links">
+                        <a href="mailto:${partner.email}" class="contact-btn email-btn">Contact</a>
+                        ${linkedinLink}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterPartners(filter) {
+            currentFilter = filter;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            displayPartners();
+        }
+
+        function updateCollectiveStats() {
+            // Calculate total years (approximate based on experience entries)
+            let totalYears = 0;
+            allPartners.forEach(partner => {
+                totalYears += partner.experiences.length * 3; // Rough estimate
+            });
+
+            // Count unique expertise areas
+            const allExpertise = new Set();
+            allPartners.forEach(partner => {
+                partner.expertise.forEach(exp => allExpertise.add(exp));
+            });
+
+            // Count languages
+            let totalLanguages = 0;
+            allPartners.forEach(partner => {
+                if (partner.languages) {
+                    totalLanguages += partner.languages.split(/[,\n]/).length;
+                }
+            });
+
+            document.getElementById('totalYears').textContent = totalYears + '+';
+            document.getElementById('totalPartners').textContent = allPartners.length;
+            document.getElementById('totalExpertise').textContent = allExpertise.size;
+            document.getElementById('totalLanguages').textContent = totalLanguages;
+        }
+    </script>
+</body>
+</html>
